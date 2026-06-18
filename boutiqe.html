@@ -1,0 +1,648 @@
+# S3 Beauty Parlor & Boutique — Professional Demo Website
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>S3 Beauty Parlor & Boutique</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #fffafc;
+      color: #2c2c2c;
+      overflow-x: hidden;
+    }
+
+    h1,h2,h3,h4,h5 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 700;
+    }
+
+    .navbar {
+      background: rgba(20,20,20,0.85);
+      backdrop-filter: blur(12px);
+      padding: 14px 0;
+    }
+
+    .navbar .container {
+      max-width: 96%;
+    }
+
+    .navbar-brand {
+      color: #f8d5df !important;
+      font-size: 2rem;
+      letter-spacing: 0.2px;
+    }
+
+    .nav-link {
+      color: white !important;
+      margin-left: 34px;
+      transition: 0.3s ease;
+      font-weight: 500;
+    }
+
+    .nav-link:hover {
+      color: #f7b5c6 !important;
+    }
+
+    .hero {
+      min-height: 100vh;
+      background:
+      linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)),
+      url('https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?q=80&w=1974&auto=format&fit=crop') center/cover no-repeat;
+      display: flex;
+      align-items: center;
+      text-align: center;
+      color: white;
+      padding: 80px 20px;
+    }
+
+    .hero h1 {
+      font-size: 4.5rem;
+    }
+
+    .hero p {
+      max-width: 760px;
+      margin: 25px auto;
+      font-size: 1.15rem;
+      line-height: 1.8;
+    }
+
+    .btn-custom {
+      background: linear-gradient(135deg, #f39bb4, #d96c8c);
+      color: white;
+      border: none;
+      padding: 14px 34px;
+      border-radius: 50px;
+      font-weight: 600;
+      transition: 0.3s ease;
+    }
+
+    .btn-custom:hover {
+      transform: translateY(-3px);
+      background: linear-gradient(135deg, #df7d9d, #c65377);
+      color: white;
+    }
+
+    section {
+      padding: 90px 0;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .section-title h2 {
+      font-size: 3rem;
+      color: #7d3450;
+    }
+
+    .section-title p {
+      color: #666;
+      margin-top: 12px;
+    }
+
+    .service-card,
+    .feature-card,
+    .testimonial-card,
+    .pricing-card {
+      background: white;
+      border-radius: 22px;
+      padding: 35px;
+      height: 100%;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+      transition: 0.3s ease;
+    }
+
+    .service-card:hover,
+    .feature-card:hover,
+    .testimonial-card:hover,
+    .pricing-card:hover {
+      transform: translateY(-8px);
+    }
+
+    .service-card img,
+    .gallery img,
+    .boutique-showcase img {
+      width: 100%;
+      border-radius: 18px;
+      object-fit: cover;
+    }
+
+    .service-card img {
+      height: 240px;
+      margin-bottom: 22px;
+    }
+
+    .gallery img {
+      height: 300px;
+      transition: 0.3s ease;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.03);
+    }
+
+    .feature-icon {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+    }
+
+    .package-list {
+      list-style: none;
+      padding-left: 0;
+      margin-top: 20px;
+    }
+
+    .package-list li {
+      padding: 10px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .cta-section {
+      background: linear-gradient(135deg,#7d3450,#cb6f92);
+      color: white;
+      padding: 80px 40px;
+      border-radius: 30px;
+      text-align: center;
+    }
+
+    .contact-card {
+      background: white;
+      border-radius: 24px;
+      padding: 35px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+      height: 100%;
+    }
+
+    .map-box iframe {
+      width: 100%;
+      min-height: 450px;
+      border: none;
+      border-radius: 24px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+    }
+
+    footer {
+      background: #1c1115;
+      color: #ddd;
+      padding: 50px 0 20px;
+    }
+
+    footer a {
+      color: #f7b5c6;
+      text-decoration: none;
+    }
+
+    .footer-bottom {
+      margin-top: 25px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      text-align: center;
+    }
+
+    @media(max-width:768px){
+
+      .hero h1 {
+        font-size: 3rem;
+      }
+
+      .section-title h2 {
+        font-size: 2.3rem;
+      }
+
+    }
+
+  </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+  <div class="container">
+
+    <a class="navbar-brand" href="#">S3 Beauty Parlor & Boutique</a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+        <li class="nav-item"><a class="nav-link" href="#boutique">Boutique</a></li>
+        <li class="nav-item"><a class="nav-link" href="#gallery">Gallery</a></li>
+        <li class="nav-item"><a class="nav-link" href="#packages">Packages</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+      </ul>
+    </div>
+
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="container">
+
+    <h1>Luxury Beauty & Fashion Experience</h1>
+
+    <p>
+      Welcome to S3 Beauty Parlor & Boutique — your premium destination for beauty,
+      bridal makeovers, skincare, hair styling, and elegant boutique collections designed
+      to enhance confidence and style.
+    </p>
+
+    <a href="#services" class="btn btn-custom btn-lg mt-3">Explore Services</a>
+
+  </div>
+</section>
+
+<section id="about">
+  <div class="container">
+
+    <div class="section-title">
+      <h2>About S3</h2>
+      <p>Professional beauty care and boutique fashion under one premium experience.</p>
+    </div>
+
+    <div class="row align-items-center g-5">
+
+      <div class="col-lg-6">
+        <img class="img-fluid rounded-5 shadow"
+        src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?q=80&w=1974&auto=format&fit=crop"
+        alt="Beauty Salon">
+      </div>
+
+      <div class="col-lg-6">
+
+        <h3 class="mb-4">Elegant Beauty, Fashion & Self-Care</h3>
+
+        <p>
+          S3 Beauty Parlor & Boutique offers a luxurious blend of beauty services,
+          personalized grooming, skincare treatments, bridal styling, and boutique fashion collections.
+        </p>
+
+        <p>
+          Our experienced professionals focus on quality, hygiene, comfort, and style to provide
+          a premium beauty experience tailored to every client.
+        </p>
+
+        <div class="row mt-4 g-4">
+
+          <div class="col-md-6">
+            <div class="feature-card text-center">
+              <div class="feature-icon">💄</div>
+              <h5>Professional Makeup</h5>
+              <p>Bridal and party makeup with premium products.</p>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="feature-card text-center">
+              <div class="feature-icon">👗</div>
+              <h5>Fashion Boutique</h5>
+              <p>Trendy ethnic and designer collections.</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<section id="services" style="background:#fff1f5;">
+  <div class="container">
+
+    <div class="section-title">
+      <h2>Beauty Services</h2>
+      <p>Complete beauty, skincare, and makeover solutions.</p>
+    </div>
+
+    <div class="row g-4">
+
+      <div class="col-lg-4 col-md-6">
+        <div class="service-card">
+          <img src="https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?q=80&w=1974&auto=format&fit=crop" alt="Hair Styling">
+          <h4>Hair Styling & Care</h4>
+
+          <ul class="package-list">
+            <li>Haircuts & Layer Styling</li>
+            <li>Hair Spa & Keratin Care</li>
+            <li>Hair Coloring</li>
+            <li>Straightening & Smoothening</li>
+            <li>Bridal Hair Styling</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6">
+        <div class="service-card">
+          <img src="https://images.unsplash.com/photo-1487412912498-0447578fcca8?q=80&w=1974&auto=format&fit=crop" alt="Makeup">
+          <h4>Makeup & Bridal</h4>
+
+          <ul class="package-list">
+            <li>Bridal Makeup</li>
+            <li>Party Makeup</li>
+            <li>Engagement Makeovers</li>
+            <li>HD & Airbrush Makeup</li>
+            <li>Saree Draping</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6">
+        <div class="service-card">
+          <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?q=80&w=1974&auto=format&fit=crop" alt="Skincare">
+          <h4>Skincare & Grooming</h4>
+
+          <ul class="package-list">
+            <li>Facials & Cleanup</li>
+            <li>Manicure & Pedicure</li>
+            <li>Waxing & Threading</li>
+            <li>Skin Brightening Treatments</li>
+            <li>Luxury Spa Sessions</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<section id="boutique">
+  <div class="container">
+
+    <div class="section-title">
+      <h2>Boutique Collections</h2>
+      <p>Elegant fashion collections curated for every occasion.</p>
+    </div>
+
+    <div class="row g-4 boutique-showcase">
+
+      <div class="col-md-4">
+        <div class="service-card">
+          <img src="https://images.unsplash.com/photo-1496747611176-843222e1e57c?q=80&w=1973&auto=format&fit=crop" alt="Ethnic Wear">
+          <h4>Ethnic Wear</h4>
+          <p>Designer sarees, lehengas, kurtis, and festive collections.</p>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="service-card">
+          <img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?q=80&w=1974&auto=format&fit=crop" alt="Designer Fashion">
+          <h4>Designer Fashion</h4>
+          <p>Premium modern outfits crafted with elegance and style.</p>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="service-card">
+          <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?q=80&w=1974&auto=format&fit=crop" alt="Accessories">
+          <h4>Accessories</h4>
+          <p>Fashion accessories, handbags, jewelry, and styling essentials.</p>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<section id="gallery" style="background:#fff1f5;">
+  <div class="container">
+
+    <div class="section-title">
+      <h2>Gallery</h2>
+      <p>Explore our beauty transformations and fashion collections.</p>
+    </div>
+
+    <div class="row g-4 gallery">
+
+      <div class="col-md-4">
+        <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?q=80&w=1974&auto=format&fit=crop" alt="Gallery 1">
+      </div>
+
+      <div class="col-md-4">
+        <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=1974&auto=format&fit=crop" alt="Gallery 2">
+      </div>
+
+      <div class="col-md-4">
+        <img src="https://images.unsplash.com/photo-1526045478516-99145907023c?q=80&w=1974&auto=format&fit=crop" alt="Gallery 3">
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<section id="packages">
+  <div class="container">
+
+    <div class="section-title">
+      <h2>Popular Packages</h2>
+      <p>Luxury beauty packages for every occasion.</p>
+    </div>
+
+    <div class="row g-4">
+
+      <div class="col-lg-4">
+        <div class="pricing-card text-center">
+          <h3>Bridal Package</h3>
+          <ul class="package-list text-start">
+            <li>Complete Bridal Makeup</li>
+            <li>Hair Styling</li>
+            <li>Saree Draping</li>
+            <li>Skincare Preparation</li>
+            <li>Premium Accessories Support</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-lg-4">
+        <div class="pricing-card text-center">
+          <h3>Party Makeover</h3>
+          <ul class="package-list text-start">
+            <li>Party Makeup</li>
+            <li>Hair Styling</li>
+            <li>Quick Facial</li>
+            <li>Fashion Styling Guidance</li>
+            <li>Photography Ready Finish</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-lg-4">
+        <div class="pricing-card text-center">
+          <h3>Luxury Self-Care</h3>
+          <ul class="package-list text-start">
+            <li>Luxury Facial</li>
+            <li>Hair Spa</li>
+            <li>Manicure & Pedicure</li>
+            <li>Relaxation Spa</li>
+            <li>Skin Glow Treatment</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <div class="container">
+
+    <div class="cta-section">
+      <h2>Enhance Your Beauty & Style</h2>
+
+      <p class="mt-3 mb-4">
+        Experience luxury beauty care and fashion styling tailored specially for you.
+      </p>
+
+      <a href="#contact" class="btn btn-light btn-lg rounded-pill px-4">
+        Book Appointment
+      </a>
+
+    </div>
+
+  </div>
+</section>
+
+<section id="contact">
+  <div class="container">
+
+    <div class="section-title">
+      <h2>Visit Our Studio</h2>
+      <p>Connect with us for appointments, bridal bookings, and boutique collections.</p>
+    </div>
+
+    <div class="row g-5 align-items-center">
+
+      <div class="col-lg-5">
+
+        <div class="contact-card">
+
+          <h4 class="mb-4">S3 Beauty Parlor & Boutique</h4>
+
+          <p>
+            <strong>Location:</strong><br>
+            Visakhapatnam, Andhra Pradesh
+          </p>
+
+          <p>
+            <strong>Opening Hours:</strong><br>
+            Monday – Sunday<br>
+            10:00 AM – 9:00 PM
+          </p>
+
+          <p>
+            <strong>Services:</strong><br>
+            Bridal Makeup • Hair Styling • Boutique Fashion • Spa & Grooming
+          </p>
+
+          <p>
+            <strong>Phone:</strong><br>
+            +91 98765 43210
+          </p>
+
+          <p>
+            <strong>Email:</strong><br>
+            contact@s3boutique.com
+          </p>
+
+          <a href="https://www.google.com/maps/place/S3+Lounge+Boutique/@17.7227024,83.3142396,20.61z/data=!4m14!1m7!3m6!1s0x3a394315546bbc5b:0x3c48eba93f0d4c2!2sDivine+Touch+School!8m2!3d17.722793!4d83.3137224!16s%2Fg%2F11cl_jyln0!3m5!1s0x3a39433f8c5c2141:0x8164273e50222731!8m2!3d17.7226685!4d83.3143719!16s%2Fg%2F11d_xk59gk?entry=ttu&g_ep=EgoyMDI2MDUyMC4wIKXMDSoASAFQAw%3D%3D"
+          target="_blank"
+          class="btn btn-custom mt-2">
+            Open in Google Maps
+          </a>
+
+        </div>
+
+      </div>
+
+      <div class="col-lg-7">
+
+        <div class="map-box">
+          <iframe
+          src="https://maps.google.com/maps?q=17.7226685,83.3143719&z=15&output=embed"
+          loading="lazy"
+          allowfullscreen>
+          </iframe>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+
+    <div class="row g-4">
+
+      <div class="col-lg-4">
+        <h4>S3 Beauty Parlor & Boutique</h4>
+
+        <p class="mt-3">
+          Luxury beauty services and elegant boutique collections crafted to elevate confidence, style, and self-care.
+        </p>
+      </div>
+
+      <div class="col-lg-4">
+        <h5>Quick Links</h5>
+
+        <ul class="list-unstyled mt-3">
+          <li><a href="#about">About</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#boutique">Boutique</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="col-lg-4">
+        <h5>Follow Us</h5>
+
+        <p class="mt-3">
+          Instagram • Facebook • WhatsApp
+        </p>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      © 2026 S3 Beauty Parlor & Boutique. All Rights Reserved.
+    </div>
+
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
+```
